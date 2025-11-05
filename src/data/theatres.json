@@ -1,0 +1,20 @@
+[
+  {
+    "id": "theatre-1",
+    "name": "ABC-Multiplex",
+    "seatLayout": {
+      "silver": { "rows": 3, "seatsPerRow": 10, "price": 100 },
+      "gold": { "rows": 3, "seatsPerRow": 10, "price": 150 },
+      "platinum": { "rows": 3, "seatsPerRow": 10, "price": 200 }
+    }
+  },
+  {
+    "id": "theatre-2",
+    "name": "XYZ-Multiplex",
+    "seatLayout": {
+      "silver": { "rows": 3, "seatsPerRow": 10, "price": 100 },
+      "gold": { "rows": 5, "seatsPerRow": 10, "price": 150 },
+      "platinum": { "rows": 4, "seatsPerRow": 10, "price": 200 }
+    }
+  }
+]

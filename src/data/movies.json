@@ -1,0 +1,152 @@
+[
+  {
+    "id": "movie-1",
+    "title": "Dies Irae",
+    "genre": "Horror/Thriller",
+    "language": "Malayalam",
+    "releaseDate": "2025-10-31",
+    "duration": "120 min",
+    "rating": 4.5,
+    "poster": "https://via.placeholder.com/300x450?text=Dies+Irae",
+    "description": "A wealthy young architect named Rohan faces terrifying supernatural events after the suicide of his schoolmate. A chilling horror film that explores guilt, desire, and obsession.",
+    "cast": ["Pranav Mohanlal", "Sushmitha Bhatt", "Shine Tom Chacko"],
+    "director": "Rahul Sadasivan",
+    "shows": [
+      {
+        "theatre": "ABC-Multiplex",
+        "screen": "Screen 1",
+        "time": "10:00 AM"
+      },
+      {
+        "theatre": "ABC-Multiplex",
+        "screen": "Screen 2",
+        "time": "01:30 PM"
+      },
+      {
+        "theatre": "XYZ-Multiplex",
+        "screen": "Screen 3",
+        "time": "04:00 PM"
+      },
+      {
+        "theatre": "XYZ-Multiplex",
+        "screen": "Screen 1",
+        "time": "07:00 PM"
+      },
+      {
+        "theatre": "XYZ-Multiplex",
+        "screen": "Screen 2",
+        "time": "10:00 PM"
+      }
+    ]
+  },
+  {
+    "id": "movie-2",
+    "title": "Nellikkampoyil Night Riders",
+    "genre": "Horror/Comedy",
+    "language": "Malayalam",
+    "releaseDate": "2025-10-23",
+    "duration": "135 min",
+    "rating": 3.5,
+    "poster": "https://via.placeholder.com/300x450?text=Night+Riders",
+    "description": "Set in a border village wrapped in age-old myths, Shyam and his friends uncover mysteries in Nellikkampoyil. A perfect blend of horror, comedy, and romance set in the 1970s.",
+    "cast": ["Mathew Thomas", "Roshan Shanavas", "Merin Philip"],
+    "director": "Noufal Abdullah",
+    "shows": [
+      {
+        "theatre": "ABC-Multiplex",
+        "screen": "Screen 1",
+        "time": "11:00 AM"
+      },
+      {
+        "theatre": "ABC-Multiplex",
+        "screen": "Screen 3",
+        "time": "03:00 PM"
+      },
+      {
+        "theatre": "XYZ-Multiplex",
+        "screen": "Screen 1",
+        "time": "06:00 PM"
+      },
+      {
+        "theatre": "XYZ-Multiplex",
+        "screen": "Screen 3",
+        "time": "09:00 PM"
+      }
+    ]
+  },
+  {
+    "id": "movie-3",
+    "title": "The Pet Detective",
+    "genre": "Action/Comedy",
+    "language": "Malayalam",
+    "releaseDate": "2025-10-16",
+    "duration": "145 min",
+    "rating": 4.0,
+    "poster": "https://via.placeholder.com/300x450?text=Pet+Detective",
+    "description": "Private detective Tony Jose Alula takes on a mysterious case that spirals into unexpected adventures. An entertaining action-comedy with stellar performances and humor.",
+    "cast": ["Sharaf U Dheen", "Anupama Parameswaran", "Vinay Forrt"],
+    "director": "Praneesh Vijayan",
+    "shows": [
+      {
+        "theatre": "ABC-Multiplex",
+        "screen": "Screen 2",
+        "time": "09:30 AM"
+      },
+      {
+        "theatre": "ABC-Multiplex",
+        "screen": "Screen 1",
+        "time": "12:30 PM"
+      },
+      {
+        "theatre": "ABC-Multiplex",
+        "screen": "Screen 3",
+        "time": "06:30 PM"
+      },
+      {
+        "theatre": "XYZ-Multiplex",
+        "screen": "Screen 2",
+        "time": "05:00 PM"
+      },
+      {
+        "theatre": "XYZ-Multiplex",
+        "screen": "Screen 3",
+        "time": "08:30 PM"
+      }
+    ]
+  },
+  {
+    "id": "movie-4",
+    "title": "Baahubali: The Beginning",
+    "genre": "Action/Fantasy",
+    "language": "Malayalam",
+    "releaseDate": "2015-07-10",
+    "duration": "159 min",
+    "rating": 8.2,
+    "poster": "https://via.placeholder.com/300x450?text=Baahubali",
+    "description": "An epic fantasy action film that tells the story of two brothers fighting for a kingdom. A grand cinematic experience with stunning visuals and intense action sequences.",
+    "cast": ["Prabhas", "Rana Daggubati", "Anushka Shetty"],
+    "director": "S.S. Rajamouli",
+    "shows": [
+      {
+        "theatre": "ABC-Multiplex",
+        "screen": "Screen 2",
+        "time": "02:00 PM"
+      },
+      {
+        "theatre": "ABC-Multiplex",
+        "screen": "Screen 3",
+        "time": "05:30 PM"
+      },
+      {
+        "theatre": "XYZ-Multiplex",
+        "screen": "Screen 1",
+        "time": "03:30 PM"
+      },
+      {
+        "theatre": "XYZ-Multiplex",
+        "screen": "Screen 2",
+        "time": "08:00 PM"
+      }
+    ]
+  }
+]
