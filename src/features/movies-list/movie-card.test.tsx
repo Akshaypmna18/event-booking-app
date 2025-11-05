@@ -4,7 +4,6 @@ import { BrowserRouter } from "react-router";
 import userEvent from "@testing-library/user-event";
 import MovieCard from "./movie-card";
 import { type Movie } from "./types";
-import moviesData from "@/data/movies.json";
 
 // Mock useNavigate
 const mockNavigate = vi.fn();
