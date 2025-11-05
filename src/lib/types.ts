@@ -21,3 +21,34 @@ export interface Show {
   screen: string;
   time: string;
 }
+
+export interface SeatCategory {
+  rows: number;
+  price: number;
+}
+
+export interface SeatLayout {
+  silver: SeatCategory;
+  gold: SeatCategory;
+  platinum: SeatCategory;
+}
+
+export interface Theatre {
+  id: string;
+  name: string;
+  seatLayout: SeatLayout;
+}
+
+export type SeatType = "silver" | "gold" | "platinum";
+
+export type SeatStatus = "available" | "unavailable";
+
+export type SeatObject = Record<
+  string,
+  {
+    status: SeatStatus;
+    type: SeatType;
+  }
+>;
+
+export type BookedSeat = Record<string, SeatType>;
