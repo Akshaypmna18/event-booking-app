@@ -19,7 +19,7 @@ vi.mock("@/data/movies.json", () => ({
         "A wealthy young architect named Rohan faces terrifying supernatural events.",
       cast: ["Pranav Mohanlal", "Sushmitha Bhatt"],
       director: "Rahul Sadasivan",
-      shows: [],
+      theatres: [],
     },
     {
       id: "2",
@@ -33,7 +33,7 @@ vi.mock("@/data/movies.json", () => ({
       description: "Set in a border village wrapped in age-old myths.",
       cast: ["Mathew Thomas", "Roshan Shanavas"],
       director: "Noufal Abdullah",
-      shows: [],
+      theatres: [],
     },
     {
       id: "3",
@@ -48,7 +48,7 @@ vi.mock("@/data/movies.json", () => ({
         "Private detective Tony Jose Alula takes on a mysterious case.",
       cast: ["Sharaf U Dheen", "Anupama Parameswaran"],
       director: "Praneesh Vijayan",
-      shows: [],
+      theatres: [],
     },
     {
       id: "4",
@@ -62,7 +62,7 @@ vi.mock("@/data/movies.json", () => ({
       description: "An epic fantasy action film.",
       cast: ["Prabhas", "Rana Daggubati"],
       director: "S.S. Rajamouli",
-      shows: [],
+      theatres: [],
     },
   ],
 }));

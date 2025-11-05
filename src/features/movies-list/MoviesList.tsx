@@ -1,6 +1,6 @@
 import moviesData from "@/data/movies.json";
-import MovieCard from "./movie-card";
-import { type Movie } from "@/features/movies-list/types";
+import MovieCard from "@/components/movie-card";
+import { type Movie } from "@/lib/types";
 
 export default function MoviesList() {
   const movies = moviesData as Movie[];
@@ -14,9 +14,9 @@ export default function MoviesList() {
         </p>
       </div>
 
-      <div className="space-y-4 max-w-5xl mx-auto">
+      <div className="space-y-4 max-w-5xl mx-auto grid lg:grid-cols-2 lg:gap-x-4">
         {movies.map((movie) => (
-          <MovieCard key={movie.id} movie={movie} />
+          <MovieCard key={movie.id} movie={movie} isMovieListPage />
         ))}
       </div>
     </section>

@@ -2,8 +2,8 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { BrowserRouter } from "react-router";
 import userEvent from "@testing-library/user-event";
-import MovieCard from "./movie-card";
-import { type Movie } from "./types";
+import MovieCard from "@/components/movie-card";
+import { type Movie } from "@/lib/types";
 
 // Mock useNavigate
 const mockNavigate = vi.fn();
@@ -28,20 +28,24 @@ const mockMovie: Movie = {
     "A wealthy young architect named Rohan faces terrifying supernatural events after the suicide of his schoolmate.",
   cast: ["Pranav Mohanlal", "Sushmitha Bhatt", "Shine Tom Chacko"],
   director: "Rahul Sadasivan",
-  shows: [
+  theatres: [
     {
-      theatre: "ABC-Multiplex",
-      screen: "Screen 1",
-      time: "10:00 AM",
+      name: "ABC-Multiplex",
+      shows: [
+        {
+          screen: "Screen 1",
+          time: "10:00 AM",
+        },
+      ],
     },
   ],
 };
 
 // Helper function to render component
-const renderMovieCard = (movie: Movie = mockMovie) => {
+const renderMovieCard = (movie: Movie = mockMovie, isMovieListPage = true) => {
   return render(
     <BrowserRouter>
-      <MovieCard movie={movie} />
+      <MovieCard movie={movie} isMovieListPage={isMovieListPage} />
     </BrowserRouter>
   );
 };
@@ -103,11 +107,29 @@ describe("MovieCard Component", () => {
       expect(poster).toBeInTheDocument();
       expect(poster).toHaveAttribute("src", "https://example.com/poster.jpg");
     });
+  });
 
-    it("should render Book button", () => {
-      renderMovieCard();
+  describe("Conditional Book Button", () => {
+    it("should render Book button when isMovieListPage is true", () => {
+      renderMovieCard(mockMovie, true);
       const bookButton = screen.getByRole("button", { name: /book/i });
       expect(bookButton).toBeInTheDocument();
+    });
+
+    it("should NOT render Book button when isMovieListPage is false", () => {
+      renderMovieCard(mockMovie, false);
+      const bookButton = screen.queryByRole("button", { name: /book/i });
+      expect(bookButton).not.toBeInTheDocument();
+    });
+
+    it("should render Book button by default (when isMovieListPage not specified)", () => {
+      render(
+        <BrowserRouter>
+          <MovieCard movie={mockMovie} />
+        </BrowserRouter>
+      );
+      const bookButton = screen.queryByRole("button", { name: /book/i });
+      expect(bookButton).not.toBeInTheDocument();
     });
   });
 

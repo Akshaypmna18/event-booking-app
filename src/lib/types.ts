@@ -9,11 +9,15 @@ export interface Movie {
   description: string;
   cast: string[];
   director: string;
+  theatres: Theatre[];
+}
+
+export interface Theatre {
+  name: string;
   shows: Show[];
 }
 
 export interface Show {
-  theatre: string;
   screen: string;
   time: string;
 }

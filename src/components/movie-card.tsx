@@ -1,14 +1,18 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { type Movie } from "./types";
+import { type Movie } from "@/lib/types";
 import { useNavigate } from "react-router";
 
 interface MovieCardProps {
   movie: Movie;
+  isMovieListPage?: boolean;
 }
 
-export default function MovieCard({ movie }: MovieCardProps) {
+export default function MovieCard({
+  movie,
+  isMovieListPage = false,
+}: MovieCardProps) {
   const navigate = useNavigate();
 
   const handleBookNow = () => {
@@ -65,9 +69,11 @@ export default function MovieCard({ movie }: MovieCardProps) {
           </div>
 
           <div className="mt-auto">
-            <Button onClick={handleBookNow} className="w-full sm:w-auto px-8">
-              Book
-            </Button>
+            {isMovieListPage && (
+              <Button onClick={handleBookNow} className="w-full sm:w-auto px-8">
+                Book
+              </Button>
+            )}
           </div>
         </div>
       </div>
