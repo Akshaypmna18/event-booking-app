@@ -1,10 +1,10 @@
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
-import { type Theatre, type Show } from "@/lib/types";
+import { type TheatreMovie, type Show } from "@/lib/types";
 import { useNavigate } from "react-router";
 
 type TheatreName = string;
-type TheatreCardProps = Theatre & { movieName: string };
+type TheatreCardProps = TheatreMovie & { movieName: string };
 
 export default function TheatreCard({
   name,
@@ -25,7 +25,7 @@ export default function TheatreCard({
         {shows?.map((show: Show) => (
           <Badge
             key={show?.screen + show?.time}
-            className="rounded-sm flex flex-col px-4 py-2 text-base"
+            className="rounded-sm flex flex-col px-4 py-2 text-base cursor-pointer hover:bg-gray-200"
             variant="outline"
             onClick={() => handleShowBtnClick(show, name)}
           >

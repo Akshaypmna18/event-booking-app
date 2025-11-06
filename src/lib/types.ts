@@ -9,10 +9,10 @@ export interface Movie {
   description: string;
   cast: string[];
   director: string;
-  theatres: Theatre[];
+  theatres: TheatreMovie[];
 }
 
-export interface Theatre {
+export interface TheatreMovie {
   name: string;
   shows: Show[];
 }

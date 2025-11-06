@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react";
 import { BrowserRouter } from "react-router";
 import userEvent from "@testing-library/user-event";
 import TheatreCard from "./theatre-card";
-import { type Theatre } from "@/lib/types";
+import { type TheatreMovie } from "@/lib/types";
 
 // Mock useNavigate
 const mockNavigate = vi.fn();
@@ -16,7 +16,7 @@ vi.mock("react-router", async () => {
   };
 });
 
-const mockTheatre: Theatre = {
+const mockTheatre: TheatreMovie = {
   name: "ABC-Multiplex",
   shows: [
     {
@@ -34,11 +34,16 @@ const mockTheatre: Theatre = {
   ],
 };
 
+const mockMovieName = "Dies Irae";
+
 // Helper function to render component
-const renderTheatreCard = (theatre: Theatre = mockTheatre) => {
+const renderTheatreCard = (
+  theatre: TheatreMovie = mockTheatre,
+  movieName: string = mockMovieName
+) => {
   return render(
     <BrowserRouter>
-      <TheatreCard {...theatre} />
+      <TheatreCard {...theatre} movieName={movieName} />
     </BrowserRouter>
   );
 };
@@ -46,7 +51,6 @@ const renderTheatreCard = (theatre: Theatre = mockTheatre) => {
 // Helper to find clickable badge by screen name
 const findBadgeByScreen = (screenName: string) => {
   const heading = screen.getByRole("heading", { name: screenName, level: 4 });
-  // The badge has class "rounded-sm" and onClick handler
   const badge = heading.closest(".rounded-sm");
   return badge;
 };
@@ -90,7 +94,6 @@ describe("TheatreCard Component", () => {
     it("should render screen name and time together in each badge", () => {
       renderTheatreCard();
 
-      // Verify Screen 1 badge has both screen and time
       const screen1Element = screen.getByText("Screen 1");
       const badge1 = screen1Element.closest("div");
       expect(badge1).toHaveTextContent("Screen 1");
@@ -109,9 +112,11 @@ describe("TheatreCard Component", () => {
       expect(mockNavigate).toHaveBeenCalledTimes(1);
       expect(mockNavigate).toHaveBeenCalledWith("/seat-booking", {
         state: {
-          show: {
+          showDetails: {
             screen: "Screen 1",
             time: "10:00 AM",
+            name: "ABC-Multiplex",
+            movieName: "Dies Irae",
           },
         },
       });
@@ -127,9 +132,11 @@ describe("TheatreCard Component", () => {
 
       expect(mockNavigate).toHaveBeenCalledWith("/seat-booking", {
         state: {
-          show: {
+          showDetails: {
             screen: "Screen 2",
             time: "01:30 PM",
+            name: "ABC-Multiplex",
+            movieName: "Dies Irae",
           },
         },
       });
@@ -142,12 +149,28 @@ describe("TheatreCard Component", () => {
 
       expect(mockNavigate).toHaveBeenCalledWith("/seat-booking", {
         state: {
-          show: {
+          showDetails: {
             screen: "Screen 3",
             time: "04:00 PM",
+            name: "ABC-Multiplex",
+            movieName: "Dies Irae",
           },
         },
       });
+    });
+
+    it("should include theatre name and movie name in navigation state", async () => {
+      const user = userEvent.setup();
+      renderTheatreCard();
+
+      const firstShowBadge = findBadgeByScreen("Screen 1");
+      await user.click(firstShowBadge!);
+
+      const navigationCall = mockNavigate.mock.calls[0];
+      const showDetails = navigationCall[1].state.showDetails;
+
+      expect(showDetails.name).toBe("ABC-Multiplex");
+      expect(showDetails.movieName).toBe("Dies Irae");
     });
 
     it("should call navigate only once per click", async () => {
@@ -172,9 +195,11 @@ describe("TheatreCard Component", () => {
       expect(mockNavigate).toHaveBeenCalledTimes(2);
       expect(mockNavigate).toHaveBeenCalledWith("/seat-booking", {
         state: {
-          show: {
+          showDetails: {
             screen: "Screen 1",
             time: "10:00 AM",
+            name: "ABC-Multiplex",
+            movieName: "Dies Irae",
           },
         },
       });
@@ -200,9 +225,38 @@ describe("TheatreCard Component", () => {
     });
   });
 
+  describe("Props Handling", () => {
+    it("should handle different movie names", async () => {
+      const user = userEvent.setup();
+      renderTheatreCard(mockTheatre, "Baahubali");
+
+      const firstShowBadge = findBadgeByScreen("Screen 1");
+      await user.click(firstShowBadge!);
+
+      const navigationCall = mockNavigate.mock.calls[0];
+      expect(navigationCall[1].state.showDetails.movieName).toBe("Baahubali");
+    });
+
+    it("should handle different theatre names", async () => {
+      const user = userEvent.setup();
+      const customTheatre: TheatreMovie = {
+        name: "XYZ-Multiplex",
+        shows: [{ screen: "Screen 1", time: "10:00 AM" }],
+      };
+
+      renderTheatreCard(customTheatre, mockMovieName);
+
+      const firstShowBadge = findBadgeByScreen("Screen 1");
+      await user.click(firstShowBadge!);
+
+      const navigationCall = mockNavigate.mock.calls[0];
+      expect(navigationCall[1].state.showDetails.name).toBe("XYZ-Multiplex");
+    });
+  });
+
   describe("Key Generation", () => {
     it("should handle shows with same screen but different times", () => {
-      const theatreWithDuplicateScreens: Theatre = {
+      const theatreWithDuplicateScreens: TheatreMovie = {
         name: "Test Theatre",
         shows: [
           { screen: "Screen 1", time: "10:00 AM" },

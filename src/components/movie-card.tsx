@@ -27,7 +27,7 @@ export default function MovieCard({
           <img
             src={movie.poster}
             alt={movie.title}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover min-[400px]:object-contain sm:object-cover"
           />
         </div>
 
@@ -68,13 +68,13 @@ export default function MovieCard({
             </p>
           </div>
 
-          <div className="mt-auto">
-            {isMovieListPage && (
+          {isMovieListPage && (
+            <div className="mt-auto">
               <Button onClick={handleBookNow} className="w-full sm:w-auto px-8">
                 Book
               </Button>
-            )}
-          </div>
+            </div>
+          )}
         </div>
       </div>
     </Card>
