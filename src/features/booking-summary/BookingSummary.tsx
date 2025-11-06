@@ -77,7 +77,7 @@ export default function BookingSummary() {
   if (!bookingData) return <ErrorPage />;
 
   return (
-    <section className="container mx-auto px-4 py-8 space-y-4">
+    <section className="container mx-auto px-4 py-8 space-y-4 min-h-dvh">
       <BookingSuccessAlert isOpen={isOpen} />
       <div className="space-y-4 max-w-5xl mx-auto">
         <div className="mb-8">
