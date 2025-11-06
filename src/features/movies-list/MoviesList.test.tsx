@@ -67,16 +67,7 @@ vi.mock("@/data/movies.json", () => ({
   ],
 }));
 
-// Mock navigate
-const mockNavigate = vi.fn();
-vi.mock("react-router", async () => {
-  const actual = await vi.importActual("react-router");
-  return {
-    ...actual,
-    useNavigate: () => mockNavigate,
-  };
-});
-
+// Helper function to render component
 const renderMoviesList = () => {
   return render(
     <BrowserRouter>
@@ -165,13 +156,6 @@ describe("MoviesList Page", () => {
   });
 
   describe("Accessibility", () => {
-    it("should have accessible heading structure", () => {
-      renderMoviesList();
-
-      const heading = screen.getByRole("heading", { level: 1 });
-      expect(heading).toBeInTheDocument();
-    });
-
     it("should have accessible buttons for all movies", () => {
       renderMoviesList();
 

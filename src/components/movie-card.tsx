@@ -15,9 +15,7 @@ export default function MovieCard({
 }: MovieCardProps) {
   const navigate = useNavigate();
 
-  const handleBookNow = () => {
-    navigate("/theatre-list", { state: { movie } });
-  };
+  const handleBookNow = () => navigate("/theatre-list", { state: { movie } });
 
   return (
     <Card className="overflow-hidden hover:shadow-lg transition-shadow duration-300 p-0">
@@ -47,7 +45,6 @@ export default function MovieCard({
             </div>
 
             <div className="flex items-center gap-2 flex-wrap text-sm text-muted-foreground">
-              {" "}
               {movie.language} | {movie.genre} | Duration: {movie.duration}
             </div>
           </div>

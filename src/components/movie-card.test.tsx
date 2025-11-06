@@ -4,17 +4,7 @@ import { BrowserRouter } from "react-router";
 import userEvent from "@testing-library/user-event";
 import MovieCard from "@/components/movie-card";
 import { type Movie } from "@/lib/types";
-
-// Mock useNavigate
-const mockNavigate = vi.fn();
-
-vi.mock("react-router", async () => {
-  const actual = await vi.importActual("react-router");
-  return {
-    ...actual,
-    useNavigate: () => mockNavigate,
-  };
-});
+import { mockNavigate } from "@/test/setup";
 
 const mockMovie: Movie = {
   id: "movie-1",
@@ -52,7 +42,6 @@ const renderMovieCard = (movie: Movie = mockMovie, isMovieListPage = true) => {
 
 describe("MovieCard Component", () => {
   beforeEach(() => {
-    // Clear all mocks before each test
     vi.clearAllMocks();
   });
 

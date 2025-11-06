@@ -10,9 +10,11 @@ export default function SeatPricingCard() {
       <CardHeader>
         <CardTitle>Pricing</CardTitle>
       </CardHeader>
+
       <CardContent className="space-y-2">
         {SEAT_CATEGORIES.map((category) => {
           const config = SEAT_CATEGORY_CONFIG[category];
+
           return (
             <div key={category} className="flex items-center justify-between">
               <div className="flex items-center gap-2">

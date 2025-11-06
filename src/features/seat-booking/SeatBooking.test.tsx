@@ -3,16 +3,7 @@ import { render, screen } from "@testing-library/react";
 import { BrowserRouter } from "react-router";
 import SeatBooking from "./SeatBooking";
 import type { ShowDetailsCardProps } from "./types";
-
-const mockLocation = vi.fn();
-
-vi.mock("react-router", async () => {
-  const actual = await vi.importActual("react-router");
-  return {
-    ...actual,
-    useLocation: () => mockLocation(),
-  };
-});
+import { mockLocation } from "@/test/setup";
 
 vi.mock("./components/show-details-card", () => ({
   default: (props: ShowDetailsCardProps) => (

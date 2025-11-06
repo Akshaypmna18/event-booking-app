@@ -15,6 +15,7 @@ export default function ShowDetailsCard({
           <h3 className="text-xl font-semibold">
             {movieName} : {name}
           </h3>
+
           <Badge variant="secondary" className="rounded-sm text-base px-3 py-1">
             {screen}
           </Badge>

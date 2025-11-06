@@ -2,19 +2,7 @@ import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { render, screen, act, fireEvent } from "@testing-library/react";
 import { BrowserRouter } from "react-router";
 import BookingSuccessAlert from "./booking-success-alert";
-
-// Mock useNavigate
-const mockNavigate = vi.fn();
-
-vi.mock("react-router", async () => {
-  const actual = await vi.importActual<typeof import("react-router")>(
-    "react-router"
-  );
-  return {
-    ...actual,
-    useNavigate: () => mockNavigate,
-  };
-});
+import { mockNavigate } from "@/test/setup";
 
 // Mock UI components (simple pass-through test doubles)
 vi.mock("@/components/ui/alert-dialog", () => ({

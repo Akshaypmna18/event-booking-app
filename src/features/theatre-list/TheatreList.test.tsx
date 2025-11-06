@@ -3,18 +3,7 @@ import { render, screen } from "@testing-library/react";
 import { BrowserRouter } from "react-router";
 import TheatreList from "./TheatreList";
 import { type Movie } from "@/lib/types";
-
-// Mock useLocation
-const mockLocation = vi.fn();
-
-vi.mock("react-router", async () => {
-  const actual = await vi.importActual("react-router");
-  return {
-    ...actual,
-    useLocation: () => mockLocation(),
-    useNavigate: () => vi.fn(),
-  };
-});
+import { mockLocation } from "@/test/setup";
 
 const mockMovie: Movie = {
   id: "movie-1",

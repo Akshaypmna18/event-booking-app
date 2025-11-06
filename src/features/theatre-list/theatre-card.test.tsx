@@ -4,17 +4,7 @@ import { BrowserRouter } from "react-router";
 import userEvent from "@testing-library/user-event";
 import TheatreCard from "./theatre-card";
 import { type TheatreMovie } from "@/lib/types";
-
-// Mock useNavigate
-const mockNavigate = vi.fn();
-
-vi.mock("react-router", async () => {
-  const actual = await vi.importActual("react-router");
-  return {
-    ...actual,
-    useNavigate: () => mockNavigate,
-  };
-});
+import { mockNavigate } from "@/test/setup";
 
 const mockTheatre: TheatreMovie = {
   name: "ABC-Multiplex",

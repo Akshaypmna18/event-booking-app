@@ -3,13 +3,13 @@ import { persist, devtools } from "zustand/middleware";
 import type { BookedSeatsRecord, SeatObject } from "./lib/types";
 
 interface EventAppState {
-  seats: Record<string, SeatObject[]>;
+  seats: Record<string, SeatObject[]>; //stores in local storage, for showing available/unavailable seats
   setSeats: (seats: Record<string, SeatObject[]>) => void;
 
-  bookedSeats: BookedSeatsRecord;
+  bookedSeats: BookedSeatsRecord; // stores user selected seats for booking, uses uniqueMovieId for identification
   setBookedSeats: (bookedSeats: BookedSeatsRecord) => void;
 
-  uniqueMovieId?: string;
+  uniqueMovieId?: string; // created using movieName, theatreName, showTime
   setUniqueMovieId: (id?: string) => void;
 }
 

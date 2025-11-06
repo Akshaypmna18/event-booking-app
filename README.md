@@ -69,7 +69,7 @@ This project uses a modular architecture with:
 | Styling          | Tailwind CSS             |
 | State Management | Zustand                  |
 | Routing          | React Router v7          |
-| UI Components    | Radix UI                 |
+| UI Components    | Shadcn(Radix UI)         |
 | Icons            | Lucide React             |
 | Testing          | Vitest + Testing Library |
 | Linting          | ESLint                   |

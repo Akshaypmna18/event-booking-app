@@ -7,15 +7,15 @@ export default function TheatreList() {
   const location = useLocation();
   const movie: Movie = location.state?.movie;
 
-  if (!movie) {
-    return <section>No movie data available</section>;
-  }
+  if (!movie) return <section>No movie data available</section>;
 
   return (
-    <section className="container mx-auto px-4 py-8 space-y-4">
+    <section className="container mx-auto px-4 py-8 space-y-4 min-h-dvh">
       <div className="space-y-4 max-w-5xl mx-auto">
         <MovieCard movie={movie} />
+
         <h2 className="font-bold text-2xl">Available Theatres</h2>
+
         {movie?.theatres.map(({ name, shows }: TheatreMovie) => (
           <TheatreCard
             key={name}

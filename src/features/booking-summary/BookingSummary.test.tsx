@@ -4,6 +4,7 @@ import userEvent from "@testing-library/user-event";
 import { BrowserRouter } from "react-router";
 import BookingSummary from "./BookingSummary";
 import type { BookingData } from "./BookingSummary";
+import { mockLocation, mockNavigate } from "@/test/setup";
 
 // Mock useLocation
 const mockBookingData: BookingData = {
@@ -15,25 +16,6 @@ const mockBookingData: BookingData = {
   selectedSeatIds: ["A1", "A2"],
   numberOfSelectedSeats: 2,
 };
-
-interface MockLocationReturn {
-  state: {
-    bookingData: BookingData | null;
-  };
-  pathname: string;
-}
-
-const mockLocation = vi.fn<() => MockLocationReturn>();
-const mockNavigate = vi.fn();
-
-vi.mock("react-router", async () => {
-  const actual = await vi.importActual("react-router");
-  return {
-    ...actual,
-    useLocation: () => mockLocation(),
-    useNavigate: () => mockNavigate,
-  };
-});
 
 // Mock store
 const mockSetBookedSeats = vi.fn();

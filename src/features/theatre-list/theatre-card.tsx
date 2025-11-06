@@ -21,6 +21,7 @@ export default function TheatreCard({
   return (
     <Card className="p-4 gap-2">
       <h2 className="text-xl">{name}</h2>
+
       <div className="flex flex-wrap gap-3">
         {shows?.map((show: Show) => (
           <Badge

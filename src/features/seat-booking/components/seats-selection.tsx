@@ -51,7 +51,7 @@ export default function SeatsSelection({
         )
       : [...currentForMovie, { [key]: type }];
 
-    // Enforce max warning
+    // max warning
     if (!hasSeat && nextForMovie.length > TOTAL_SEATS) {
       setIsOpen(true);
       return;

@@ -1,4 +1,10 @@
-import type { BookedSeat, SeatLayout, SeatObject, SeatType } from "@/lib/types";
+import type {
+  BookedSeat,
+  SeatLayout,
+  SeatObject,
+  SeatStatus,
+  SeatType,
+} from "@/lib/types";
 import type { ShowDetailsCardProps } from "./types";
 import theatresData from "@/data/theatres.json";
 
@@ -9,7 +15,7 @@ export const TOTAL_SEATS = 8 as const;
 type ExistingVal =
   | string
   | {
-      status?: "available" | "unavailable";
+      status?: SeatStatus;
       type?: SeatType;
     };
 
@@ -36,11 +42,32 @@ export function getTotalRows(seatLayout: SeatLayout | undefined): number {
 }
 
 export function rowIndexToLetters(index: number): string {
-  let s = "";
-  for (index++; index > 0; index = Math.floor((index - 1) / 26)) {
-    s = String.fromCharCode(65 + ((index - 1) % 26)) + s;
+  let result = "";
+  index++;
+
+  while (index > 0) {
+    const remainder = (index - 1) % 26;
+    result = String.fromCharCode(65 + remainder) + result;
+    index = Math.floor((index - 1) / 26);
   }
-  return s;
+
+  return result;
+}
+
+// to determine what seat type corresponds to a given row number
+export function convertRowToType(
+  r: number,
+  layout: SeatLayout | undefined
+): SeatType {
+  const types: SeatType[] = ["silver", "gold", "platinum"];
+
+  let i = r;
+  for (const t of types) {
+    const rows = layout?.[t]?.rows ?? 0;
+    if (i < rows) return t;
+    i -= rows;
+  }
+  return types[types.length - 1];
 }
 
 export function createSeats(
@@ -57,20 +84,9 @@ export function createSeats(
     (seats[id] || []).map((obj) => Object.entries(obj)[0]!)
   );
 
-  const types: SeatType[] = ["silver", "gold", "platinum"];
-  const rowToType = (r: number): SeatType => {
-    let i = r;
-    for (const t of types) {
-      const rows = layout?.[t]?.rows ?? 0;
-      if (i < rows) return t;
-      i -= rows;
-    }
-    return types[types.length - 1];
-  };
-
   const result: SeatObject[] = [];
   for (let r = 0; r < totalRows; r++) {
-    const computedType = rowToType(r);
+    const computedType = convertRowToType(r, layout);
     const row = rowIndexToLetters(r);
 
     for (let c = 1; c <= MAX_COLUMNS; c++) {
@@ -91,6 +107,7 @@ export function createSeats(
   return { [id]: result };
 }
 
+// to get seatId
 export const getKeysArray = (arr: BookedSeat[]): string[] => {
   return arr?.map((seat) => {
     const key = Object.keys(seat || {})?.[0];
