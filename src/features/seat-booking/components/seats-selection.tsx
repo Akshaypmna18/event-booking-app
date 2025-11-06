@@ -41,24 +41,26 @@ export default function SeatsSelection({
 
     const currentForMovie = bookedSeats[uniqueMovieId] ?? [];
 
-    const exists = currentForMovie.some((seat) =>
+    const hasSeat = currentForMovie.some((seat) =>
       Object.prototype.hasOwnProperty.call(seat, key)
     );
 
-    const updatedForMovie = exists
+    const nextForMovie = hasSeat
       ? currentForMovie.filter(
           (seat) => !Object.prototype.hasOwnProperty.call(seat, key)
         )
       : [...currentForMovie, { [key]: type }];
 
-    if (updatedForMovie.length > TOTAL_SEATS) {
+    // Enforce max warning
+    if (!hasSeat && nextForMovie.length > TOTAL_SEATS) {
       setIsOpen(true);
       return;
     }
 
     const nextBookedSeats = { ...bookedSeats };
-    if (updatedForMovie.length)
-      nextBookedSeats[uniqueMovieId] = updatedForMovie;
+    if (nextForMovie.length === 0)
+      delete nextBookedSeats[uniqueMovieId]; // clear the movie entry when empty
+    else nextBookedSeats[uniqueMovieId] = nextForMovie;
 
     setBookedSeats(nextBookedSeats);
   };
@@ -87,8 +89,9 @@ export default function SeatsSelection({
           <button
             key={index}
             onClick={() => handleSeatClick(key, type)}
+            disabled={!isAvailable}
             className={`w-8 h-8 flex items-center justify-center rounded-t-sm cursor-pointer ${
-              !isAvailable ? "opacity-30" : ""
+              !isAvailable ? "opacity-30 cursor-not-allowed" : ""
             } ${SEAT_CATEGORY_CONFIG?.[type]?.color} ${
               type !== "gold" ? "text-white" : ""
             }`}

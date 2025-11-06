@@ -30,7 +30,6 @@ const useEventAppStore = create<EventAppState>()(
         name: "event-app-storage",
         partialize: (state) => ({
           seats: state.seats,
-          bookedSeats: state.bookedSeats,
         }),
       }
     )
