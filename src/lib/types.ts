@@ -52,3 +52,5 @@ export type SeatObject = Record<
 >;
 
 export type BookedSeat = Record<string, SeatType>;
+
+export type BookedSeatsRecord = Record<string, BookedSeat[]>;

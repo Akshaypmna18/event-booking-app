@@ -1,13 +1,12 @@
-// SeatPricingCard.tsx
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import type { SeatType } from "@/lib/types";
-import { SEAT_CATEGORY_CONFIG } from "./utils";
+import { SEAT_CATEGORY_CONFIG } from "../utils";
 
 const SEAT_CATEGORIES: SeatType[] = ["silver", "gold", "platinum"];
 
 export default function SeatPricingCard() {
   return (
-    <Card className="max-w-sm">
+    <Card className="w-full sm:max-w-sm">
       <CardHeader>
         <CardTitle>Pricing</CardTitle>
       </CardHeader>

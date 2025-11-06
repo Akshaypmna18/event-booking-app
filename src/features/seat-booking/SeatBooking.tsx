@@ -1,10 +1,10 @@
 import { useLocation } from "react-router";
 import { type ShowDetailsCardProps } from "./types";
-import ShowDetailsCard from "./show-details-card";
-import ScreenIndicator from "./screen-indicator";
-import SeatsSelection from "./seats-selection";
-import SeatPricingCard from "./seat-pricing-card";
-// import BookingSummaryCard from "./booking-summary-card";
+import ShowDetailsCard from "./components/show-details-card";
+import ScreenIndicator from "./components/screen-indicator";
+import SeatsSelection from "./components/seats-selection";
+import SeatPricingCard from "./components/seat-pricing-card";
+import BookingSummaryCard from "./components/booking-summary-card";
 
 export default function SeatBooking() {
   const location = useLocation();
@@ -16,8 +16,10 @@ export default function SeatBooking() {
         <ShowDetailsCard {...showDetails} />
         <ScreenIndicator />
         <SeatsSelection {...showDetails} />
-        <SeatPricingCard />
-        {/* <BookingSummaryCard /> */}
+        <div className="flex flex-col sm:flex-row gap-4">
+          <SeatPricingCard />
+          <BookingSummaryCard {...showDetails} />
+        </div>
       </div>
     </section>
   );

@@ -1,9 +1,10 @@
-import type { SeatLayout, SeatObject, SeatType } from "@/lib/types";
+import type { BookedSeat, SeatLayout, SeatObject, SeatType } from "@/lib/types";
 import type { ShowDetailsCardProps } from "./types";
 import theatresData from "@/data/theatres.json";
-import type { Dispatch, SetStateAction } from "react";
 
 const MAX_COLUMNS = 10 as const;
+
+export const TOTAL_SEATS = 8 as const;
 
 type ExistingVal =
   | string
@@ -45,10 +46,10 @@ export function rowIndexToLetters(index: number): string {
 export function createSeats(
   showDetails: ShowDetailsCardProps,
   seats: Record<string, SeatObject[]>,
-  setId: Dispatch<SetStateAction<string | undefined>>
+  setUniqueMovieId: (id?: string) => void
 ): Record<string, SeatObject[]> {
   const id = createIdForShow(showDetails);
-  setId(id);
+  setUniqueMovieId(id);
   const layout = getSeatLayout(showDetails.name);
   const totalRows = getTotalRows(layout);
 
@@ -89,3 +90,10 @@ export function createSeats(
 
   return { [id]: result };
 }
+
+export const getKeysArray = (arr: BookedSeat[]): string[] => {
+  return arr?.map((seat) => {
+    const key = Object.keys(seat || {})?.[0];
+    return key;
+  });
+};

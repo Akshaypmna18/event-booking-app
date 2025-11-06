@@ -1,6 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { type ShowDetailsCardProps } from "./types";
+import { type ShowDetailsCardProps } from "../types";
 
 export default function ShowDetailsCard({
   screen,

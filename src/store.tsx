@@ -1,15 +1,16 @@
-// store.ts
 import { create } from "zustand";
 import { persist, devtools } from "zustand/middleware";
-import type { BookedSeat, SeatObject } from "./lib/types";
+import type { BookedSeatsRecord, SeatObject } from "./lib/types";
 
 interface EventAppState {
-  seats: {
-    [id: string]: SeatObject[];
-  };
-  setSeats: (seats: { [id: string]: SeatObject[] }) => void;
-  bookedSeats: BookedSeat[];
-  setBookedSeats: (bookedSeats: BookedSeat[]) => void;
+  seats: Record<string, SeatObject[]>;
+  setSeats: (seats: Record<string, SeatObject[]>) => void;
+
+  bookedSeats: BookedSeatsRecord;
+  setBookedSeats: (bookedSeats: BookedSeatsRecord) => void;
+
+  uniqueMovieId?: string;
+  setUniqueMovieId: (id?: string) => void;
 }
 
 const useEventAppStore = create<EventAppState>()(
@@ -19,13 +20,17 @@ const useEventAppStore = create<EventAppState>()(
         seats: {},
         setSeats: (seats) => set({ seats }),
 
-        bookedSeats: [],
+        bookedSeats: {},
         setBookedSeats: (bookedSeats) => set({ bookedSeats }),
+
+        uniqueMovieId: undefined,
+        setUniqueMovieId: (id) => set({ uniqueMovieId: id }),
       }),
       {
         name: "event-app-storage",
         partialize: (state) => ({
           seats: state.seats,
+          bookedSeats: state.bookedSeats,
         }),
       }
     )
