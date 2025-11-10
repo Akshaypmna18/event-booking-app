@@ -1,7 +1,13 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { CheckCircle } from "lucide-react";
-import { AlertDialog, AlertDialogContent } from "@/components/ui/alert-dialog";
+import {
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogDescription,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
@@ -20,17 +26,15 @@ export default function BookingSuccessAlert({
     if (!isOpen) return;
 
     const timer = setInterval(() => {
-      setCountdown((prev) => {
-        if (prev <= 1) {
-          handleGoHome();
-          return 0;
-        }
-        return prev - 1;
-      });
+      setCountdown((prev) => prev - 1);
     }, 1000);
 
     return () => clearInterval(timer);
   }, [isOpen]);
+
+  useEffect(() => {
+    if (countdown === 0) handleGoHome();
+  }, [countdown]);
 
   if (!isOpen) return null;
 
@@ -40,6 +44,15 @@ export default function BookingSuccessAlert({
 
   return (
     <AlertDialog open={isOpen}>
+      <AlertDialogHeader className="sr-only">
+        <AlertDialogTitle className="text-red-600">
+          Too many tickets selected
+        </AlertDialogTitle>
+        <AlertDialogDescription>
+          You can only select <b>up to 8 tickets</b>. Please adjust your
+          selection.
+        </AlertDialogDescription>
+      </AlertDialogHeader>
       <AlertDialogContent className="p-0" data-testid="alert-content">
         <Card className="text-center -space-y-3" data-testid="card">
           <CheckCircle

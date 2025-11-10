@@ -8,7 +8,7 @@ import {
 } from "../utils";
 import { useEffect, useState, type Dispatch, type SetStateAction } from "react";
 import { Check } from "lucide-react";
-import type { SeatObject, SeatType } from "@/lib/types";
+import type { SeatType } from "@/lib/types";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -18,8 +18,6 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
-
-type LocalState = { [id: string]: SeatObject[] } | undefined;
 
 export default function SeatsSelection({
   ...showDetails
@@ -33,7 +31,6 @@ export default function SeatsSelection({
     setUniqueMovieId,
   } = useEventAppStore();
 
-  const [localSeats, setLocalSeats] = useState<LocalState>();
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const handleSeatClick = (key: string, type: SeatType): void => {
@@ -68,14 +65,13 @@ export default function SeatsSelection({
   useEffect(() => {
     const localSeats = createSeats(showDetails, seats, setUniqueMovieId);
     setSeats(localSeats);
-    setLocalSeats(localSeats);
   }, []);
 
   return (
     <div className="grid grid-cols-10 gap-2 max-w-2xl mx-auto">
       <AlertComponent isOpen={isOpen} setIsOpen={setIsOpen} />
 
-      {localSeats?.[uniqueMovieId || ""]?.map((item, index) => {
+      {seats?.[uniqueMovieId || ""]?.map((item, index) => {
         const key = Object.keys(item)[0];
         const { status, type } = item[key];
 
@@ -113,7 +109,7 @@ export const AlertComponent = ({
 }) => {
   return (
     <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
-      <AlertDialogContent>
+      <AlertDialogContent onOpenAutoFocus={(e) => e.preventDefault()}>
         <AlertDialogHeader>
           <AlertDialogTitle className="text-red-600">
             Too many tickets selected

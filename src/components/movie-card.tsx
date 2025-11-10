@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { type Movie } from "@/lib/types";
 import { useNavigate } from "react-router";
+import { Star } from "lucide-react";
 
 interface MovieCardProps {
   movie: Movie;
@@ -40,7 +41,8 @@ export default function MovieCard({
                 variant="secondary"
                 className="shrink-0"
               >
-                ⭐ {movie.rating}
+                <Star fill="#eab308" strokeWidth={0} className="!w-4 !h-4" />
+                {movie.rating}
               </Badge>
             </div>
 
