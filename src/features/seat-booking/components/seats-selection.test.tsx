@@ -117,6 +117,7 @@ vi.mock("@/components/ui/alert-dialog", () => ({
 import SeatsSelection from "./seats-selection";
 import useStore from "@/store";
 import * as utils from "../utils";
+import type { Mock } from "vitest";
 
 // handy alias to set store returns in individual tests
 const mockedUseStore = useStore as unknown as Mock;
