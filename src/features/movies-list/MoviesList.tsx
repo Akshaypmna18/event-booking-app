@@ -14,7 +14,7 @@ export default function MoviesList() {
         </p>
       </div>
 
-      <div className="max-w-6xl mx-auto grid xl:grid-cols-2 xl:gap-4">
+      <div className="max-xl:space-y-4 max-w-6xl mx-auto grid xl:grid-cols-2 xl:gap-4">
         {movies.map((movie) => (
           <MovieCard key={movie.id} movie={movie} isMovieListPage />
         ))}
