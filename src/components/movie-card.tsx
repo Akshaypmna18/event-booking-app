@@ -22,7 +22,11 @@ export default function MovieCard({
     <Card className="overflow-hidden hover:shadow-lg transition-shadow duration-300 p-0">
       <div className="flex flex-col sm:flex-row">
         {/* Left: Poster */}
-        <div className="relative w-full sm:w-48 h-64 sm:h-auto shrink-0 bg-muted">
+        <div
+          className={`relative w-full max-w-48 h-64  ${
+            isMovieListPage ? "sm:h-[17rem]" : "sm:h-[13rem]"
+          } shrink-0 bg-muted `}
+        >
           <img
             src={movie.poster}
             alt={movie.title}
@@ -46,7 +50,7 @@ export default function MovieCard({
               </Badge>
             </div>
 
-            <div className="flex items-center gap-2 flex-wrap text-sm text-muted-foreground">
+            <div className="flex items-center gap-2 flex-wrap text-sm text-muted-foreground ">
               {movie.language} | {movie.genre} | Duration: {movie.duration}
             </div>
           </div>
@@ -56,7 +60,7 @@ export default function MovieCard({
           </p>
 
           {/* Cast & Director */}
-          <div className="space-y-1 text-sm mb-4">
+          <div className="space-y-1 text-sm mb-2">
             <p className="text-muted-foreground">
               <span className="font-medium text-foreground">Cast:</span>{" "}
               {movie.cast.join(", ")}
