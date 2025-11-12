@@ -62,7 +62,6 @@ export const onRequestPost = async ({ request, env }: PagesFunctionArgs) => {
         key: KEY,
         addedItem: value,
         totalItems: dataArray.length,
-        url: BASE_URL,
       }),
       {
         status: 201,

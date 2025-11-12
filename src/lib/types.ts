@@ -54,3 +54,16 @@ export type SeatObject = Record<
 export type BookedSeat = Record<string, SeatType>;
 
 export type BookedSeatsRecord = Record<string, BookedSeat[]>;
+
+export interface Booking {
+  movieName: string;
+  theatreName: string;
+  time: string;
+  selectedSeats: string[];
+  price: number;
+}
+
+export interface BookingsResponse {
+  key: "bookings";
+  bookings: Booking[];
+}

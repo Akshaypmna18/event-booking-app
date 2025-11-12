@@ -1,9 +1,15 @@
-import moviesData from "@/data/movies.json";
+import LoadingFallback from "@/components/LoadingFallback";
 import MovieCard from "@/components/movie-card";
-import { type Movie } from "@/lib/types";
+import { getMovies } from "@/lib/services";
+import { useQuery } from "@tanstack/react-query";
 
 export default function MoviesList() {
-  const movies = moviesData as Movie[];
+  const { data: movies, isLoading } = useQuery({
+    queryKey: ["bookings"],
+    queryFn: getMovies,
+  });
+
+  if (isLoading) return <LoadingFallback />;
 
   return (
     <section className="container mx-auto px-4 py-8 min-h-dvh">
@@ -15,7 +21,7 @@ export default function MoviesList() {
       </div>
 
       <div className="max-xl:space-y-4 max-w-6xl mx-auto grid xl:grid-cols-2 xl:gap-4">
-        {movies.map((movie) => (
+        {movies?.map((movie) => (
           <MovieCard key={movie.id} movie={movie} isMovieListPage />
         ))}
       </div>
