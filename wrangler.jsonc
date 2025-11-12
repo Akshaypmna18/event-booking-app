@@ -1,0 +1,11 @@
+{
+	"name": "event-booking-app",
+	"compatibility_date": "2024-01-01",
+	"pages_build_output_dir": "dist",
+	"kv_namespaces": [
+		{
+			"binding": "EVENT_BOOKING_APP",
+			"id": "a67e56bc09184682a96a45218f64003d"
+		}
+	]
+}
