@@ -47,7 +47,7 @@ describe("Utils Functions", () => {
 
   describe("getSeatLayout", () => {
     it("should return seat layout for matching theatre", () => {
-      const result = getSeatLayout("ABC-Multiplex");
+      const result = getSeatLayout("ABC-Multiplex", []);
 
       expect(result).toBeDefined();
       expect(result).toHaveProperty("silver");
@@ -56,13 +56,13 @@ describe("Utils Functions", () => {
     });
 
     it("should return undefined for non-existent theatre", () => {
-      const result = getSeatLayout("Non-Existent Theatre");
+      const result = getSeatLayout("Non-Existent Theatre", []);
 
       expect(result).toBeUndefined();
     });
 
     it("should return correct layout structure", () => {
-      const result = getSeatLayout("ABC-Multiplex");
+      const result = getSeatLayout("ABC-Multiplex", []);
 
       expect(result?.silver).toBeDefined();
       expect(result?.gold).toBeDefined();
@@ -144,7 +144,7 @@ describe("Utils Functions", () => {
 
     it("should create seats with correct structure", () => {
       const seats: Record<string, SeatObject[]> = {};
-      const result = createSeats(showDetails, seats, mockSetUniqueMovieId);
+      const result = createSeats(showDetails, [], seats, mockSetUniqueMovieId);
 
       // Should return object with show ID as key
       expect(Object.keys(result).length).toBe(1);
@@ -157,7 +157,7 @@ describe("Utils Functions", () => {
 
     it("should call setUniqueMovieId with show ID", () => {
       const seats: Record<string, SeatObject[]> = {};
-      createSeats(showDetails, seats, mockSetUniqueMovieId);
+      createSeats(showDetails, [], seats, mockSetUniqueMovieId);
 
       expect(mockSetUniqueMovieId).toHaveBeenCalled();
       expect(mockSetUniqueMovieId).toHaveBeenCalledWith(
@@ -167,7 +167,7 @@ describe("Utils Functions", () => {
 
     it("should create seats with available status by default", () => {
       const seats: Record<string, SeatObject[]> = {};
-      const result = createSeats(showDetails, seats, mockSetUniqueMovieId);
+      const result = createSeats(showDetails, [], seats, mockSetUniqueMovieId);
 
       const [seatArray] = Object.values(result);
 
@@ -181,7 +181,7 @@ describe("Utils Functions", () => {
 
     it("should generate correct seat IDs", () => {
       const seats: Record<string, SeatObject[]> = {};
-      const result = createSeats(showDetails, seats, mockSetUniqueMovieId);
+      const result = createSeats(showDetails, [], seats, mockSetUniqueMovieId);
 
       const [seatArray] = Object.values(result);
 
