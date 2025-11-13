@@ -11,7 +11,7 @@ export const onRequestOptions = async () => {
   });
 };
 
-const KEY = "bookings";
+const KEY = "bookings-main";
 
 export const onRequestPost = async ({ request, env }: PagesFunctionArgs) => {
   const kv = env.EVENT_BOOKING_APP;
@@ -72,9 +72,8 @@ export const onRequestPost = async ({ request, env }: PagesFunctionArgs) => {
       }
     );
   } catch (err) {
-    console.error("Error in POST /bookings:", err);
     return new Response(
-      JSON.stringify({ error: "Invalid JSON body or internal error" }),
+      JSON.stringify({ error: "Invalid JSON body or internal error", err }),
       {
         status: 500,
         headers: {

@@ -11,6 +11,7 @@ import type { SeatObject, SeatStatus } from "@/lib/types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createBooking } from "@/lib/services";
 import type { Booking } from "@/lib/types";
+import { toast } from "sonner";
 
 export interface BookingData extends ShowDetailsCardProps {
   totalPrice: number;
@@ -39,6 +40,18 @@ export default function BookingSummary() {
     mutationFn: (booking: Booking) => createBooking(booking),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["bookings"] });
+      updateLocalStorageSeatsData();
+      removeBookedSeats();
+      setIsOpen(true);
+    },
+    onError: (error) => {
+      toast.error("Booking failed", {
+        description: error?.message || "Please try again later.",
+        action: {
+          label: "Close",
+          onClick: () => toast.dismiss(),
+        },
+      });
     },
   });
 
@@ -92,9 +105,6 @@ export default function BookingSummary() {
       selectedSeats: selectedSeatIds,
       price: totalPrice,
     });
-    updateLocalStorageSeatsData();
-    removeBookedSeats();
-    setIsOpen(true);
   };
 
   if (!bookingData) return <ErrorPage />;
