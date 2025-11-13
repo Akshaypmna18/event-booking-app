@@ -12,6 +12,8 @@ const mockBookingData: BookingData = {
   time: "10:00 AM",
   name: "ABC-Multiplex",
   movieName: "Dies Irae",
+  poster:
+    "https://m.media-amazon.com/images/M/MV5BMWVlYzQ5NmYtNjc3Ni00ZTQyLTliYmQtNDAzYzJhMDEzOTg0XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
   totalPrice: 500,
   selectedSeatIds: ["A1", "A2"],
   numberOfSelectedSeats: 2,

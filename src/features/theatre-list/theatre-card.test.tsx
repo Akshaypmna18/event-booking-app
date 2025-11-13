@@ -23,17 +23,19 @@ const mockTheatre: TheatreMovie = {
     },
   ],
 };
-
 const mockMovieName = "Dies Irae";
+const mockPoster =
+  "https://m.media-amazon.com/images/M/MV5BMWVlYzQ5NmYtNjc3Ni00ZTQyLTliYmQtNDAzYzJhMDEzOTg0XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg";
 
 // Helper function to render component
 const renderTheatreCard = (
   theatre: TheatreMovie = mockTheatre,
-  movieName: string = mockMovieName
+  movieName: string = mockMovieName,
+  poster: string = mockPoster
 ) => {
   return render(
     <BrowserRouter>
-      <TheatreCard {...theatre} movieName={movieName} />
+      <TheatreCard {...theatre} movieName={movieName} poster={poster} />
     </BrowserRouter>
   );
 };

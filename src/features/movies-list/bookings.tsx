@@ -18,7 +18,7 @@ export default function Bookings() {
 
   if (!isFetched) return null;
 
-  if (data?.count && data.count === 0) return null;
+  if (!data?.count) return null;
 
   return (
     <>
