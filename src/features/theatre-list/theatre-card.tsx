@@ -4,17 +4,18 @@ import { type TheatreMovie, type Show } from "@/lib/types";
 import { useNavigate } from "react-router";
 
 type TheatreName = string;
-type TheatreCardProps = TheatreMovie & { movieName: string };
+type TheatreCardProps = TheatreMovie & { movieName: string; poster: string };
 
 export default function TheatreCard({
   name,
   shows,
   movieName,
+  poster,
 }: TheatreCardProps) {
   const navigate = useNavigate();
 
   const handleShowBtnClick = (show: Show, name: TheatreName) => {
-    const showDetails = { ...show, name, movieName };
+    const showDetails = { ...show, name, movieName, poster };
     navigate("/seat-booking", { state: { showDetails } });
   };
 

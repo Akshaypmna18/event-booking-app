@@ -38,7 +38,7 @@ export default function BookingMovieCard({ movie }: { movie: Booking }) {
           <img
             src={movie?.image}
             alt={movie?.movieName + movie?.theatreName}
-            className="w-[30%] rounded-l-sm"
+            className="w-[30%] rounded-l-sm max-h-[6.15rem]"
           />
 
           {/* Right Details */}
@@ -65,15 +65,6 @@ export default function BookingMovieCard({ movie }: { movie: Booking }) {
 type DialogProps = DialogTypes & { movie: Booking };
 
 const BookingDetailsDialog = ({ isOpen, setIsOpen, movie }: DialogProps) => {
-  const handleDownload = () => {
-    const link = document.createElement("a");
-    link.href = "/qr-code-sample.png";
-    link.download = `${movie?.movieName}-qr-code.png`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
-
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogContent
@@ -133,9 +124,15 @@ const BookingDetailsDialog = ({ isOpen, setIsOpen, movie }: DialogProps) => {
               Close
             </Button>
           </DialogClose>
-          <Button onClick={handleDownload} className="grow" type="button">
-            <Download className="w-4 h-4" /> Download Ticket
-          </Button>
+          <a
+            className="grow"
+            href="/qr-code-sample.png"
+            download={`${movie?.movieName}-qr-code.png`}
+          >
+            <Button type="button" className="w-full">
+              <Download className="w-4 h-4" /> Download Ticket
+            </Button>
+          </a>
         </DialogFooter>
       </DialogContent>
     </Dialog>

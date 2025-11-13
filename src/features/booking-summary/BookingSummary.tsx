@@ -8,16 +8,23 @@ import BookingSuccessAlert from "./booking-success-alert";
 import { useState } from "react";
 import type { ShowDetailsCardProps } from "../seat-booking/types";
 import type { SeatObject, SeatStatus } from "@/lib/types";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { createBooking } from "@/lib/services";
+import type { Booking } from "@/lib/types";
 
 export interface BookingData extends ShowDetailsCardProps {
   totalPrice: number;
   selectedSeatIds: string[];
   numberOfSelectedSeats: number;
+  poster: string;
 }
 
 export default function BookingSummary() {
   const location = useLocation();
   const bookingData: BookingData = location.state?.bookingData;
+
+  const { name, movieName, selectedSeatIds, totalPrice, screen, time, poster } =
+    bookingData ?? {};
 
   const { bookedSeats, setBookedSeats, uniqueMovieId, seats, setSeats } =
     useEventAppStore();
@@ -25,6 +32,15 @@ export default function BookingSummary() {
   const [isOpen, setIsOpen] = useState<boolean | undefined>();
 
   const navigate = useNavigate();
+
+  const queryClient = useQueryClient();
+
+  const mutation = useMutation({
+    mutationFn: (booking: Booking) => createBooking(booking),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["bookings"] });
+    },
+  });
 
   const removeBookedSeats = (): void => {
     if (!uniqueMovieId) return;
@@ -39,11 +55,9 @@ export default function BookingSummary() {
 
     const seatsArrayofCurrentMovie = seats?.[uniqueMovieId];
 
-    const selectedSeats = bookingData?.selectedSeatIds;
-
     const updatedSeats = seatsArrayofCurrentMovie.map((seatObj) => {
       const seatKey = Object.keys(seatObj)[0]; // e.g., "A1"
-      if (selectedSeats.includes(seatKey)) {
+      if (selectedSeatIds.includes(seatKey)) {
         const current = seatObj[seatKey];
         return {
           [seatKey]: {
@@ -69,6 +83,15 @@ export default function BookingSummary() {
   };
 
   const handlePayment = (): void => {
+    mutation.mutate({
+      movieName,
+      theatreName: name,
+      screen,
+      time,
+      image: poster,
+      selectedSeats: selectedSeatIds,
+      price: totalPrice,
+    });
     updateLocalStorageSeatsData();
     removeBookedSeats();
     setIsOpen(true);
@@ -85,11 +108,11 @@ export default function BookingSummary() {
         </div>
 
         <TicketsCard
-          name={bookingData?.name}
-          movieName={bookingData?.movieName}
-          selectedSeatIds={bookingData?.selectedSeatIds}
+          name={name}
+          movieName={movieName}
+          selectedSeatIds={selectedSeatIds}
         />
-        <PriceCard totalPrice={bookingData?.totalPrice} />
+        <PriceCard totalPrice={totalPrice} />
 
         <div className="flex gap-4">
           <Button onClick={handleCancel} variant="outline" className="flex-1">

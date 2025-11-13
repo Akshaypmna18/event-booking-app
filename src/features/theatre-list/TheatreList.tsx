@@ -19,9 +19,10 @@ export default function TheatreList() {
         {movie?.theatres.map(({ name, shows }: TheatreMovie) => (
           <TheatreCard
             key={name}
-            movieName={movie.title}
+            movieName={movie?.title}
             name={name}
             shows={shows}
+            poster={movie?.poster}
           />
         ))}
       </div>
