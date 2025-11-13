@@ -22,52 +22,48 @@ export default function MovieCard({
     <Card className="overflow-hidden hover:shadow-lg transition-shadow duration-300 p-0">
       <div className="flex flex-col sm:flex-row">
         {/* Left: Poster */}
-        <div
-          className={`relative w-full max-w-48 h-64  ${
+        <img
+          src={movie?.poster}
+          alt={movie?.title}
+          className={`w-full object-cover min-[400px]:object-contain sm:object-cover sm:max-w-48 h-64  ${
             isMovieListPage ? "sm:h-[17rem]" : "sm:h-[13rem]"
-          } shrink-0 bg-muted `}
-        >
-          <img
-            src={movie.poster}
-            alt={movie.title}
-            className="w-full h-full object-cover min-[400px]:object-contain sm:object-cover"
-          />
-        </div>
+          }`}
+        />
 
         {/* Right: Details */}
         <div className="flex-1 p-4 flex flex-col">
           {/* Header Section */}
           <div className="space-y-2 mb-3">
             <div className="flex items-center justify-between gap-2">
-              <h3 className="font-bold text-xl line-clamp-1">{movie.title}</h3>
+              <h3 className="font-bold text-xl line-clamp-1">{movie?.title}</h3>
               <Badge
-                data-testid={`rating-${movie.id}`}
+                data-testid={`rating-${movie?.id}`}
                 variant="secondary"
                 className="shrink-0"
               >
                 <Star fill="#eab308" strokeWidth={0} className="!w-4 !h-4" />
-                {movie.rating}
+                {movie?.rating}
               </Badge>
             </div>
 
             <div className="flex items-center gap-2 flex-wrap text-sm text-muted-foreground ">
-              {movie.language} | {movie.genre} | Duration: {movie.duration}
+              {movie?.language} | {movie?.genre} | Duration: {movie?.duration}
             </div>
           </div>
 
           <p className="text-sm text-muted-foreground line-clamp-2 mb-3">
-            {movie.description}
+            {movie?.description}
           </p>
 
           {/* Cast & Director */}
           <div className="space-y-1 text-sm mb-2">
             <p className="text-muted-foreground">
               <span className="font-medium text-foreground">Cast:</span>{" "}
-              {movie.cast.join(", ")}
+              {movie?.cast.join(", ")}
             </p>
             <p className="text-muted-foreground">
               <span className="font-medium text-foreground">Director:</span>{" "}
-              {movie.director}
+              {movie?.director}
             </p>
           </div>
 

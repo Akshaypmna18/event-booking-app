@@ -6,9 +6,9 @@ import {
   SEAT_CATEGORY_CONFIG,
   TOTAL_SEATS,
 } from "../utils";
-import { useEffect, useState, type Dispatch, type SetStateAction } from "react";
+import { useEffect, useState } from "react";
 import { Check } from "lucide-react";
-import type { SeatType } from "@/lib/types";
+import type { DialogTypes, SeatType } from "@/lib/types";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -100,13 +100,7 @@ export default function SeatsSelection({
   );
 }
 
-export const AlertComponent = ({
-  isOpen,
-  setIsOpen,
-}: {
-  isOpen: boolean;
-  setIsOpen: Dispatch<SetStateAction<boolean>>;
-}) => {
+export const AlertComponent = ({ isOpen, setIsOpen }: DialogTypes) => {
   return (
     <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
       <AlertDialogContent onOpenAutoFocus={(e) => e.preventDefault()}>

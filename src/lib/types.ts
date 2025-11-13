@@ -1,3 +1,5 @@
+import type { Dispatch, SetStateAction } from "react";
+
 export interface Movie {
   id: string;
   title: string;
@@ -58,6 +60,8 @@ export type BookedSeatsRecord = Record<string, BookedSeat[]>;
 export interface Booking {
   movieName: string;
   theatreName: string;
+  image: string;
+  screen: string;
   time: string;
   selectedSeats: string[];
   price: number;
@@ -66,4 +70,10 @@ export interface Booking {
 export interface BookingsResponse {
   key: "bookings";
   bookings: Booking[];
+  count: number;
+}
+
+export interface DialogTypes {
+  isOpen: boolean;
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
 }
