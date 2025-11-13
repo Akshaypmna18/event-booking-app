@@ -4,9 +4,9 @@ import type {
   SeatObject,
   SeatStatus,
   SeatType,
+  Theatre,
 } from "@/lib/types";
 import type { ShowDetailsCardProps } from "./types";
-import theatresData from "@/data/theatres.json";
 
 const MAX_COLUMNS = 10 as const;
 
@@ -29,7 +29,10 @@ export function createIdForShow(showDetails: ShowDetailsCardProps): string {
   return Object.values(showDetails).join("-");
 }
 
-export function getSeatLayout(name: string): SeatLayout | undefined {
+export function getSeatLayout(
+  name: string,
+  theatresData: Theatre[]
+): SeatLayout | undefined {
   const matchingTheatre = theatresData.find((theat) => theat.name === name);
   return matchingTheatre?.seatLayout;
 }
@@ -72,12 +75,13 @@ export function convertRowToType(
 
 export function createSeats(
   showDetails: ShowDetailsCardProps,
+  theatresData: Theatre[],
   seats: Record<string, SeatObject[]>,
   setUniqueMovieId: (id?: string) => void
 ): Record<string, SeatObject[]> {
   const id = createIdForShow(showDetails);
   setUniqueMovieId(id);
-  const layout = getSeatLayout(showDetails.name);
+  const layout = getSeatLayout(showDetails.name, theatresData);
   const totalRows = getTotalRows(layout);
 
   const existingMap = new Map<string, ExistingVal>(

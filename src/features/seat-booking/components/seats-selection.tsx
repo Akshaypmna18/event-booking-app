@@ -18,10 +18,24 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
+import { getTheatres } from "@/lib/services";
+import { useQuery } from "@tanstack/react-query";
+import { getErrorMessage } from "@/lib/utils";
+import LoadingFallback from "@/components/LoadingFallback";
 
 export default function SeatsSelection({
   ...showDetails
 }: ShowDetailsCardProps) {
+  const {
+    data: theatresData,
+    isLoading,
+    isError,
+    error,
+  } = useQuery({
+    queryKey: ["theatres"],
+    queryFn: getTheatres,
+  });
+
   const {
     seats,
     setSeats,
@@ -63,39 +77,55 @@ export default function SeatsSelection({
   };
 
   useEffect(() => {
-    const localSeats = createSeats(showDetails, seats, setUniqueMovieId);
+    const localSeats = createSeats(
+      showDetails,
+      theatresData ?? [],
+      seats,
+      setUniqueMovieId
+    );
     setSeats(localSeats);
-  }, []);
+  }, [theatresData]);
 
   return (
     <div className="grid grid-cols-10 gap-2 max-w-2xl mx-auto">
       <AlertComponent isOpen={isOpen} setIsOpen={setIsOpen} />
 
-      {seats?.[uniqueMovieId || ""]?.map((item, index) => {
-        const key = Object.keys(item)[0];
-        const { status, type } = item[key];
+      {isError && (
+        <div className="bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded mb-4">
+          <p className="font-semibold">Error loading movies</p>
+          <p className="text-sm">{getErrorMessage(error)}</p>
+        </div>
+      )}
 
-        const isAvailable = status === "available";
-        const selectedKeys = uniqueMovieId
-          ? getKeysArray(bookedSeats[uniqueMovieId] || [])
-          : [];
-        const isSelected = selectedKeys.includes(key);
+      {isLoading ? (
+        <LoadingFallback />
+      ) : (
+        seats?.[uniqueMovieId || ""]?.map((item) => {
+          const key = Object.keys(item)[0];
+          const { status, type } = item[key];
 
-        return (
-          <button
-            key={index}
-            onClick={() => handleSeatClick(key, type)}
-            disabled={!isAvailable}
-            className={`w-8 h-8 flex items-center justify-center rounded-t-sm cursor-pointer ${
-              !isAvailable ? "opacity-30 cursor-not-allowed" : ""
-            } ${SEAT_CATEGORY_CONFIG?.[type]?.color} ${
-              type !== "gold" ? "text-white" : ""
-            }`}
-          >
-            {isSelected ? <Check color="white" size={18} /> : key}
-          </button>
-        );
-      })}
+          const isAvailable = status === "available";
+          const selectedKeys = uniqueMovieId
+            ? getKeysArray(bookedSeats[uniqueMovieId] || [])
+            : [];
+          const isSelected = selectedKeys.includes(key);
+
+          return (
+            <button
+              key={key}
+              onClick={() => handleSeatClick(key, type)}
+              disabled={!isAvailable}
+              className={`w-8 h-8 flex items-center justify-center rounded-t-sm cursor-pointer ${
+                !isAvailable ? "opacity-30 cursor-not-allowed" : ""
+              } ${SEAT_CATEGORY_CONFIG?.[type]?.color} ${
+                type !== "gold" ? "text-white" : ""
+              }`}
+            >
+              {isSelected ? <Check color="white" size={18} /> : key}
+            </button>
+          );
+        })
+      )}
     </div>
   );
 }

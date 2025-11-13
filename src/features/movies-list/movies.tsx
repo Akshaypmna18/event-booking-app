@@ -2,6 +2,7 @@ import MovieCard from "@/components/movie-card";
 import { getMovies } from "@/lib/services";
 import { useQuery } from "@tanstack/react-query";
 import MoviesSkeltonCard from "@/components/movies-card-skelton";
+import { getErrorMessage } from "@/lib/utils";
 
 const SKELETON_COUNT = 4;
 
@@ -11,11 +12,6 @@ export default function Movies() {
     queryFn: getMovies,
   });
 
-  const getErrorMessage = () => {
-    if (error instanceof Error) return error.message;
-    return "Something went wrong";
-  };
-
   return (
     <div>
       <h2 className="font-bold text-2xl mb-4">Available Movies</h2>
@@ -23,7 +19,7 @@ export default function Movies() {
       {isError && (
         <div className="bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded mb-4">
           <p className="font-semibold">Error loading movies</p>
-          <p className="text-sm">{getErrorMessage()}</p>
+          <p className="text-sm">{getErrorMessage(error)}</p>
         </div>
       )}
 
