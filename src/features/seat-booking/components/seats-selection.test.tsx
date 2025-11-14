@@ -45,6 +45,8 @@ vi.mock("@/store", () => ({
 
 vi.mock("../utils", () => ({
   createSeats: vi.fn((details, theatres, seats, setUniqueMovieId) => {
+    console.log(details, theatres, seats);
+
     setUniqueMovieId?.("movie-1");
     return {
       "movie-1": [
