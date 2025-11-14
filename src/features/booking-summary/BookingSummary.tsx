@@ -12,6 +12,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createBooking } from "@/lib/services";
 import type { Booking } from "@/lib/types";
 import { toast } from "sonner";
+import BackNavigate from "@/components/back-navigate";
 
 export interface BookingData extends ShowDetailsCardProps {
   totalPrice: number;
@@ -113,7 +114,8 @@ export default function BookingSummary() {
     <section className="container mx-auto px-4 py-8 space-y-4 min-h-dvh">
       <BookingSuccessAlert isOpen={isOpen} />
       <div className="space-y-4 max-w-5xl mx-auto">
-        <div className="mb-8">
+        <div className="mb-8 flex items-center gap-4">
+          <BackNavigate />
           <h1 className="text-4xl font-bold mb-2">Booking Summary</h1>
         </div>
 

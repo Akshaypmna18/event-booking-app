@@ -42,7 +42,7 @@ export default function BookingSummaryCard({
   const seatsForMovie = uniqueMovieId ? bookedSeats[uniqueMovieId] ?? [] : [];
 
   const numberOfSelectedSeats = seatsForMovie.length;
-  const isBtnDisabled = numberOfSelectedSeats === 0;
+  const isSeatsNotSelected = numberOfSelectedSeats === 0;
   const selectedSeatIds = getKeysArray(seatsForMovie);
 
   const clearBookedSeatsForMovie = (): void => {
@@ -71,65 +71,103 @@ export default function BookingSummaryCard({
   };
 
   return (
-    <Card className="grow">
-      <AlertComponent
-        isOpen={isOpen}
-        setIsOpen={setIsOpen}
-        onConfirm={clearBookedSeatsForMovie}
-      />
-      <CardHeader>
-        <CardTitle>Booking Summary</CardTitle>
-      </CardHeader>
+    <>
+      <Card className="grow max-sm:hidden">
+        <AlertComponent
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          onConfirm={clearBookedSeatsForMovie}
+        />
+        <CardHeader>
+          <CardTitle>Booking Summary</CardTitle>
+        </CardHeader>
 
-      <CardContent className="space-y-2 pt-0">
-        {/* Seats row */}
-        <div className="grid grid-cols-2 items-center">
-          <span className="text-sm md:text-base">Seats:</span>
-          <span className="text-right text-sm md:text-base">
-            {numberOfSelectedSeats}/{TOTAL_SEATS}
-          </span>
-        </div>
+        <CardContent className="space-y-2 pt-0">
+          {/* Seats row */}
+          <div className="grid grid-cols-2 items-center">
+            <span className="text-sm md:text-base">Seats:</span>
+            <span className="text-right text-sm md:text-base">
+              {numberOfSelectedSeats}/{TOTAL_SEATS}
+            </span>
+          </div>
 
-        {/* IDs row */}
-        <div className="grid grid-cols-2 items-start">
-          <span className="text-sm md:text-base">IDs:</span>
-          <span className="text-right text-sm md:text-base break-words">
-            {numberOfSelectedSeats ? selectedSeatIds.join(", ") : "N/A"}
-          </span>
-        </div>
+          {/* IDs row */}
+          <div className="grid grid-cols-2 items-start">
+            <span className="text-sm md:text-base">IDs:</span>
+            <span className="text-right text-sm md:text-base break-words">
+              {numberOfSelectedSeats ? selectedSeatIds.join(", ") : "N/A"}
+            </span>
+          </div>
 
-        <Separator />
+          <Separator />
 
-        {/* Total row */}
-        <div className="grid grid-cols-2 items-center">
-          <span className="text-sm md:text-base font-semibold">Total:</span>
-          <span className="text-right text-sm md:text-base font-semibold">
-            ₹{totalPrice}
-          </span>
-        </div>
-      </CardContent>
+          {/* Total row */}
+          <div className="grid grid-cols-2 items-center">
+            <span className="text-sm md:text-base font-semibold">Total:</span>
+            <span className="text-right text-sm md:text-base font-semibold">
+              ₹{totalPrice}
+            </span>
+          </div>
+        </CardContent>
 
-      <CardFooter className="flex gap-3 justify-between">
-        <Button
-          type="button"
-          variant="outline"
-          className="w-1/2"
-          disabled={isBtnDisabled}
-          onClick={() => setIsOpen(true)}
-        >
-          Remove selected seats
-        </Button>
+        <CardFooter className="flex gap-3 justify-between">
+          <Button
+            type="button"
+            variant="outline"
+            className="w-1/2"
+            disabled={isSeatsNotSelected}
+            onClick={() => setIsOpen(true)}
+          >
+            Clear Selection
+          </Button>
 
-        <Button
-          type="button"
-          className="w-1/2"
-          disabled={isBtnDisabled}
-          onClick={handlePayment}
-        >
-          Proceed to payment
-        </Button>
-      </CardFooter>
-    </Card>
+          <Button
+            type="button"
+            className="w-1/2"
+            disabled={isSeatsNotSelected}
+            onClick={handlePayment}
+          >
+            Proceed to payment
+          </Button>
+        </CardFooter>
+      </Card>
+
+      {/* Only for screens less that 640px */}
+      {!isSeatsNotSelected && (
+        <footer className="fixed bottom-0 bg-white w-full p-4 border-t sm:hidden space-y-1 -ml-4">
+          <div className="flex gap-4">
+            <div className="flex flex-col items-center">
+              <span className="text-sm text-muted-foreground">Total:</span>
+              <span className="font-semibold text-xl">₹{totalPrice}</span>
+            </div>
+
+            <Separator orientation="vertical" className="min-h-[3rem]" />
+
+            <div>
+              <div>
+                <span className="text-sm md:text-base">Seats: </span>
+                <span className="text-right text-sm md:text-base">
+                  {numberOfSelectedSeats}/{TOTAL_SEATS}
+                </span>
+              </div>
+              <div>
+                <span className="text-sm">IDs: </span>
+                <span className="text-sm break-words">
+                  {numberOfSelectedSeats ? selectedSeatIds.join(", ") : "N/A"}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-3 flex gap-2 flex-wrap justify-center">
+            <Button disabled={isSeatsNotSelected} variant="secondary">
+              Clear Selection
+            </Button>
+            <Button disabled={isSeatsNotSelected}>Proceed to Checkout</Button>
+          </div>
+        </footer>
+      )}
+    </>
   );
 }
 

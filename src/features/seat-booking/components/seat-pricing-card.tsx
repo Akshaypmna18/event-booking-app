@@ -6,7 +6,7 @@ const SEAT_CATEGORIES: SeatType[] = ["silver", "gold", "platinum"];
 
 export default function SeatPricingCard() {
   return (
-    <Card className="w-full sm:max-w-sm">
+    <Card className="w-full sm:max-w-sm ">
       <CardHeader>
         <CardTitle>Pricing</CardTitle>
       </CardHeader>

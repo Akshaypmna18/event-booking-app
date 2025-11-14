@@ -1,6 +1,8 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { type ShowDetailsCardProps } from "../types";
+import { ChevronLeft } from "lucide-react";
+import BackNavigate from "@/components/back-navigate";
 
 export default function ShowDetailsCard({
   screen,
@@ -12,6 +14,8 @@ export default function ShowDetailsCard({
     <Card className="p-2">
       <CardContent className="p-2 space-y-3">
         <div className="flex items-center gap-3">
+          <BackNavigate />
+
           <h3 className="text-xl font-semibold">
             {movieName} : {name}
           </h3>

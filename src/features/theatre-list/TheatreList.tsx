@@ -2,6 +2,7 @@ import MovieCard from "@/components/movie-card";
 import TheatreCard from "./theatre-card";
 import { useLocation } from "react-router";
 import { type Movie, type TheatreMovie } from "@/lib/types";
+import BackNavigate from "@/components/back-navigate";
 
 export default function TheatreList() {
   const location = useLocation();
@@ -12,6 +13,11 @@ export default function TheatreList() {
   return (
     <section className="container mx-auto px-4 py-8 space-y-4 min-h-dvh">
       <div className="space-y-4 max-w-5xl mx-auto">
+        <div className="flex items-center gap-4">
+          <BackNavigate />
+          <h1 className="text-4xl font-bold mb-2">Select Theatre & Time</h1>
+        </div>
+
         <MovieCard movie={movie} />
 
         <h2 className="font-bold text-2xl">Available Theatres</h2>

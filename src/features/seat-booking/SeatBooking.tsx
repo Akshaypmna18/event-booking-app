@@ -11,14 +11,20 @@ export default function SeatBooking() {
   const showDetails: ShowDetailsCardProps = location.state?.showDetails;
 
   return (
-    <section className="container mx-auto px-4 py-8 space-y-4">
-      <div className="space-y-4 max-w-5xl mx-auto">
+    <section className="container mx-auto px-4 py-8 space-y-4 relative">
+      <div className="space-y-4 max-w-6xl mx-auto">
         <ShowDetailsCard {...showDetails} />
-        <ScreenIndicator />
-        <SeatsSelection {...showDetails} />
-        <div className="flex flex-col sm:flex-row gap-4">
-          <SeatPricingCard />
-          <BookingSummaryCard {...showDetails} />
+
+        <div className="grid grid-cols-1 xl:grid-cols-3 max-xl:gap-4">
+          <div className="xl:col-span-2">
+            <ScreenIndicator />
+            <SeatsSelection {...showDetails} />
+          </div>
+
+          <div className="flex flex-col sm:flex-row gap-4 xl:flex-col">
+            <SeatPricingCard />
+            <BookingSummaryCard {...showDetails} />
+          </div>
         </div>
       </div>
     </section>
