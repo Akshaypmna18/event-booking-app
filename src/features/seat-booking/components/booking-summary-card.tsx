@@ -160,10 +160,16 @@ export default function BookingSummaryCard({
           </div>
 
           <div className="mt-3 flex gap-2 flex-wrap justify-center">
-            <Button disabled={isSeatsNotSelected} variant="secondary">
+            <Button
+              onClick={() => setIsOpen(true)}
+              disabled={isSeatsNotSelected}
+              variant="secondary"
+            >
               Clear Selection
             </Button>
-            <Button disabled={isSeatsNotSelected}>Proceed to Checkout</Button>
+            <Button onClick={handlePayment} disabled={isSeatsNotSelected}>
+              Proceed to Checkout
+            </Button>
           </div>
         </footer>
       )}
