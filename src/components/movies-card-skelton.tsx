@@ -9,7 +9,7 @@ export default function MovieCardSkeleton({
   isMovieListPage = false,
 }: MovieCardSkeletonProps) {
   return (
-    <Card className="overflow-hidden p-0">
+    <Card data-testid="movie-card-skelton" className="overflow-hidden p-0">
       <div className="flex flex-col sm:flex-row">
         {/* Left Poster Skeleton */}
         <div
