@@ -1,7 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { type ShowDetailsCardProps } from "../types";
-import { ChevronLeft } from "lucide-react";
 import BackNavigate from "@/components/back-navigate";
 
 export default function ShowDetailsCard({
