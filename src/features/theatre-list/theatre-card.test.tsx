@@ -109,6 +109,7 @@ describe("TheatreCard Component", () => {
             time: "10:00 AM",
             name: "ABC-Multiplex",
             movieName: "Dies Irae",
+            poster: mockPoster,
           },
         },
       });
@@ -118,7 +119,6 @@ describe("TheatreCard Component", () => {
       const user = userEvent.setup();
       renderTheatreCard();
 
-      // Click second show
       const secondShowBadge = findBadgeByScreen("Screen 2");
       await user.click(secondShowBadge!);
 
@@ -129,13 +129,13 @@ describe("TheatreCard Component", () => {
             time: "01:30 PM",
             name: "ABC-Multiplex",
             movieName: "Dies Irae",
+            poster: mockPoster,
           },
         },
       });
 
       vi.clearAllMocks();
 
-      // Click third show
       const thirdShowBadge = findBadgeByScreen("Screen 3");
       await user.click(thirdShowBadge!);
 
@@ -146,6 +146,7 @@ describe("TheatreCard Component", () => {
             time: "04:00 PM",
             name: "ABC-Multiplex",
             movieName: "Dies Irae",
+            poster: mockPoster,
           },
         },
       });
@@ -192,6 +193,7 @@ describe("TheatreCard Component", () => {
             time: "10:00 AM",
             name: "ABC-Multiplex",
             movieName: "Dies Irae",
+            poster: mockPoster,
           },
         },
       });
