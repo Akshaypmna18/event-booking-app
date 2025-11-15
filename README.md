@@ -1,22 +1,22 @@
-# Event Booking App - README
+# Event Booking App
 
 ## Overview
 
-**Event Booking App** is a modern React-based web application for managing and booking events. Built with cutting-edge tools and libraries, this project demonstrates a professional setup for building scalable, type-safe applications with excellent developer experience.
+**Event Booking App** is a modern React-based web application for managing and booking events. Built with cutting-edge tools and libraries, this project demonstrates a professional setup for building scalable, type-safe applications with excellent developer and user experience.
 
 ## Features
 
-- **React 19** - Latest React framework for building user interfaces[1]
-- **TypeScript** - Full type safety and better development experience[1]
-- **Vite** - Fast build tool and development server[1]
-- **Tailwind CSS** - Utility-first CSS framework for rapid UI development[1]
-- **TanStack Query** - Powerful asynchronous state management and server-state utilities for data fetching, caching, and synchronization[2][3]
-- **Zustand** - Lightweight state management[1]
-- **React Router** - Client-side routing and navigation[1]
-- **Radix UI** - Accessible component primitives[1]
-- **Lucide React** - Beautiful icon library[1]
-- **Comprehensive Testing** - Vitest with Testing Library for unit and integration tests[1]
-- **Code Quality** - ESLint for code linting and quality assurance[1]
+- **React 19** - Latest React framework for building user interfaces
+- **TypeScript** - Full type safety and better development experience
+- **Vite** - Fast build tool and development server
+- **Tailwind CSS** - Utility-first CSS framework for rapid UI development
+- **TanStack Query** - Powerful asynchronous state management and server-state utilities for data fetching, caching, and synchronization
+- **Zustand** - Lightweight state management
+- **React Router** - Client-side routing and navigation
+- **Radix UI** - Accessible component primitives
+- **Lucide React** - Beautiful icon library
+- **Comprehensive Testing** - Vitest with Testing Library for unit tests
+- **Code Quality** - ESLint for code linting and quality assurance
 
 ## Getting Started
 
